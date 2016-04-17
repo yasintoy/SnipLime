@@ -1,0 +1,24 @@
+<snippet>
+    <content><![CDATA[
+"""Dictionary get Method
+
+We often have to initialize dictionary entries before use:
+
+This is the naïve way to do it:
+navs = {}
+for (portfolio, equity, position) in data:
+    if portfolio not in navs:
+        navs[portfolio] = 0
+    navs[portfolio] += position * prices[equity]
+
+dict.get(key, default) removes the need for the test: """
+
+navs = {}
+for (portfolio, position) in data:
+    navs[portfolio] = (navs.get(portfolio, 0) + position )
+Much more direct.
+]]></content>
+    <tabTrigger>dictget</tabTrigger>
+    <scope>source.python</scope>
+    <description>dictionary get method pattern</description>
+</snippet>

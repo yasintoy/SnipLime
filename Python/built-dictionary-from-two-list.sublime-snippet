@@ -1,0 +1,15 @@
+<snippet>
+    <content><![CDATA[
+given = ['John', 'Eric', 'Terry', 'Michael']
+family = ['Cleese', 'Idle', 'Gilliam', 'Palin']
+pythons = dict(zip(given, family)
+]]></content>
+    <tabTrigger>builddictionaryfromtwolist</tabTrigger>
+    <scope>source.python</scope>
+    <description>build dictionary from two list pattern</description>
+</snippet>
+]]></content>
+    <tabTrigger>fibonaccinumbers</tabTrigger>
+    <scope>source.python</scope>
+    <description>get fibonacci_numbers pattern</description>
+</snippet>

@@ -1,0 +1,16 @@
+
+<snippet>
+    <content><![CDATA[
+import urllib
+import BeautifulSoup
+
+htmlSource = urllib.urlopen("${1:http://sebsauvage.net/index.html}").read(200000)
+soup = BeautifulSoup.BeautifulSoup(htmlSource)
+for item in soup.fetch('a'):
+    print item['href']                                       
+    
+]]></content>
+    <tabTrigger>getlinks</tabTrigger>
+    <scope>source.python</scope>
+    <description>Python get_links_from_webpage pattern</description>
+</snippet>

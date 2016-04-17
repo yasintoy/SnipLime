@@ -1,0 +1,27 @@
+<snippet>
+    <content><![CDATA[
+# Import smtplib for the actual sending function
+import smtplib
+
+# Import the email modules we'll need
+from email.mime.text import MIMEText
+
+# Create a text/plain message
+msg = MIMEText(body)
+
+# me == the sender's email address
+# you == the recipient's email address
+msg['Subject'] = '${1:write something}'
+msg['From'] = ${2:me}
+msg['To'] = ${3:you}
+
+# Send the message via our own SMTP server, but don't include the
+# envelope header.
+s = smtplib.SMTP('localhost')
+s.sendmail(${2:me}, [${3:you}], msg.as_string())
+s.quit()        
+]]></content>
+    <tabTrigger>sendemail</tabTrigger>
+    <scope>source.python</scope>
+    <description>Python smtp_send_email pattern</description>
+</snippet>

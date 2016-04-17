@@ -1,0 +1,10 @@
+<snippet>
+    <content><![CDATA[
+with open('file.txt',"r") as f:
+    for line in f:
+        print line
+]]></content>
+    <tabTrigger>readfile</tabTrigger>
+    <scope>source.python</scope>
+    <description>read_file pattern</description>
+</snippet>

@@ -1,0 +1,16 @@
+
+<snippet>
+    <content><![CDATA[
+import ftplib                                          # We import the FTP module
+
+session = ftplib.FTP('${1: adress like blabla.com}','${2:login}','${3:passord}') # Connect to the FTP server
+myfile = open('${4:toto.txt}','rb')                    # Open the file to send
+session.storbinary('STOR ${4:toto.txt}', myfile)       # Send the file
+
+myfile.close()                                         # Close the file
+session.quit()                                         # Close FTP session
+]]></content>
+    <tabTrigger>ftpsendfile</tabTrigger>
+    <scope>source.python</scope>
+    <description>Python ftp_send_file pattern</description>
+</snippet>

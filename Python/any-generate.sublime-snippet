@@ -1,0 +1,18 @@
+<snippet>
+    <content><![CDATA[
+""" 
+instead of this 
+found = False
+for x in sequence:
+    if pred(x.n):
+        found = True
+if found:
+    ...
+"""
+if any(pred(x.item) for x in sequence):
+    ${1:...}
+]]></content>
+    <tabTrigger>anygenerate</tabTrigger>
+    <scope>source.python</scope>
+    <description>any-generate pattern</description>
+</snippet>
