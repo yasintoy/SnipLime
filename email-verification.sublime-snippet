@@ -1,0 +1,14 @@
+<snippet>
+    <content><![CDATA[
+import re
+
+addressToVerify ='info@emailhippo.com'
+match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', addressToVerify)
+
+if match == None:
+	print('Bad Syntax')
+]]></content>
+    <tabTrigger>emailverify</tabTrigger>
+    <scope>source.python</scope>
+    <description>Python email_verification pattern</description>
+</snippet>

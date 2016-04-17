@@ -1,0 +1,18 @@
+<snippet>
+    <content><![CDATA[
+class Foo(object):
+
+    def _get_thing(self):
+        """Docstring"""
+        return self._thing
+
+    def _set_thing(self, value):
+        self._thing = value
+
+    thing = property(_get_thing, _set_thing)
+    del _get_thing, _set_thing
+]]></content>
+    <tabTrigger>betterproperty</tabTrigger>
+    <scope>source.python</scope>
+    <description>Python download_stock_from_yahoo pattern</description>
+</snippet>

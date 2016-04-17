@@ -1,0 +1,29 @@
+<snippet>
+    <content><![CDATA[
+import pandas.io.data as web
+import pandas as p
+from datetime import datetime as dt
+
+start = dt(${1:2011},${2:1},${3:3})
+# end = dt.today()
+end = dt(${4:2011},${5:6},${6:5})
+
+stocks = [        '${7:XLY}',  # ${7:XLY} Consumer Discrectionary SPDR Fund   
+                       '${8:XLF}',  # ${8:XLF} Financial SPDR Fund  
+                       '${9:XLK}',  # ${9:XLK} Technology SPDR Fund  
+                       '${10:XLE}',  # ${10:XLE} Energy SPDR Fund  
+                       '${11:XLV}',  # ${11:XLV} Health Care SPRD Fund  
+                       '${12:XLI}',  # ${12:XLI} Industrial SPDR Fund  
+                       '${13:XLP}',  # ${13:XLP} Consumer Staples SPDR Fund   
+                       '${14:XLB}',  # ${14:XLB} Materials SPDR Fund  
+                       '${15:XLU}' ]
+
+prices = p.DataFrame()
+
+for stock in stocks:
+    prices[stock] = web.DataReader(stock, 'yahoo', start, end)['Adj Close']
+]]></content>
+    <tabTrigger>downloadstock</tabTrigger>
+    <scope>source.python</scope>
+    <description>Python download_stock_from_yahoo pattern</description>
+</snippet>

@@ -1,0 +1,20 @@
+<snippet>
+    <content><![CDATA[
+import twitter
+
+api = twitter.Api(consumer_key='${1:your-consumer-key}',
+                  consumer_secret='${2:your-consumer-secret}',
+                  access_token_key='${3:your-access-token-key}',
+                  access_token_secret='${4:your-access-token-secret}')
+
+# set a handle
+username = '${5:anthonydb}'
+
+# get a user timeline
+statuses = api.GetUserTimeline(screen_name=username, count=${6:1})
+print [s.text for s in statuses]
+]]></content>
+    <tabTrigger>twittergetusertimeline</tabTrigger>
+    <scope>source.python</scope>
+    <description>Python twitter_get_user_timeline pattern</description>
+</snippet>

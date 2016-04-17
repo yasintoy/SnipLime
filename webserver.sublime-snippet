@@ -1,0 +1,11 @@
+<snippet>
+    <content><![CDATA[
+import BaseHTTPServer, SimpleHTTPServer
+
+server = BaseHTTPServer.HTTPServer((${1:''},${2:80}),SimpleHTTPServer.SimpleHTTPRequestHandler)
+server.serve_forever()                                       
+]]></content>
+    <tabTrigger>webserver</tabTrigger>
+    <scope>source.python</scope>
+    <description>Python webserver pattern</description>
+</snippet>

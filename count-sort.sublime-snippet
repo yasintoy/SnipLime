@@ -1,0 +1,20 @@
+<snippet>
+    <content><![CDATA[
+def countSort(a):
+    count = [[], [], [], [], [], [], [], [], [], []]
+    for i in a:
+        count[i].append(i)
+    index = 0
+    for i in count:
+        while len(i) > 0:
+            a[index] = i.pop()
+            index += 1
+            
+a = [5,6,8,0,3,0,1,7]
+countSort(a)
+print a
+]]></content>
+    <tabTrigger>countsort</tabTrigger>
+    <scope>source.python</scope>
+    <description>count sort pattern</description>
+</snippet>
