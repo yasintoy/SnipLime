@@ -18,22 +18,29 @@ for regular problems.
 
 **Using Package Control**:
 
-> Bring up the Command Palette (Command+Shift+P on OS X, Control+Shift+P on Linux/Windows).
+> Bring up the Command Palette(Command+Shift+P on OS X, Control+Shift+P on Linux/Windows)
+
 > Select Package Control: Install Package.
+
 > Select Sublime Text 3 Snippets to install.
 
 **Not Using Package Control**:
 Save files to the Packages/Sublime Text 3 Snippets directory, then relaunch Sublime:
 
 > git clone https://github.com/yasintoy/SnipLime.git
+
 > cd SnipLime
+
 > Linux: sudo cp Python/ ~/.config/sublime-text-2/Packages/
+
 > Mac: sudo cp Python/ ~/Library/Application Support/Sublime-Text-3/Packages/
+
 > Windows: cp %APPDATA%/Sublime-Text-2/Packages/
+
 (if you want to install it for sublime-text-3, change sublime-text-2 with sublime-text-3 )
 
-## Snippets (You don't have to memorise triggers because it's really close to english sentences.)
-
+## Snippets 
+> (You don't have to memorise triggers because it's really close to english sentences.)
 Some Python Patterns snippets in the wild.
 
 <img src="http://cdn1.caiogondim.com/js-patterns-sublime-snippets-preview.gif" alt="Preview" />
@@ -194,12 +201,12 @@ for item in soup.fetch('a'):
 Implementation of Graph search with Python.
 
 ```python
-class ${1:GraphSearch}:
+class GraphSearch:
 
-    """${2:comments}"""
+    """comments"""
 
-    def __init__(self, ${3:graph}):
-        self.${3:graph} = ${3:graph}
+    def __init__(self, graph):
+        self.graph = graph
 
     def find_path(self, start, end, path=None):
         self.start = start
@@ -466,19 +473,6 @@ class Tree:
             self.traversePreorder(root.left)
             self.traversePreorder(root.right)
             print root.data
-```
-
-## Timestamped Filename
-
-**trigger**: timestampedfilename⇥
-
-```python
-import datetime, os
-
-def timestamped_filename(file_name, date_time=None):
-    date_time = date_time or datetime.datetime.now()
-    root, ext = os.path.splitext(file_name)
-    return '{}{:_%Y_%m_%d_%H_%M_%S}{}'.format(root, date_time, ext)
 ```
 
 ## And we've much more samples but I think that's enough for now.
