@@ -1,8 +1,0 @@
-<snippet>
-    <content><![CDATA[
-d = {${1:key}: ${2:value} for (${1:key}, ${2:value}) in ${3:sequence}}     
-]]></content>
-    <tabTrigger>dictcompt</tabTrigger>
-    <scope>source.python</scope>
-    <description>Python dict_comprehension pattern</description>
-</snippet>

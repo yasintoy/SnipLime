@@ -1,8 +1,0 @@
-<snippet>
-    <content><![CDATA[
-l = [${1:i} for ${1:i} in ${2:data}]     
-]]></content>
-    <tabTrigger>listcompt</tabTrigger>
-    <scope>source.python</scope>
-    <description>Python list_comprehension pattern</description>
-</snippet>
