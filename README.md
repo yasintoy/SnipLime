@@ -99,338 +99,389 @@ for x in sequence:
 if found:
     ...
 ```
+Reference:
+- [this technique from a Peter Norvig](http://norvig.com/sudoku.html)
 
+## Dictionary Comprehension
 
-## Improved for loop
+**trigger:** dictcomp⇥
 
-**trigger:** ifor⇥
+A faster and pythonic way to create a `dict`.
 
-A faster way to write a `for` loop. It caches the array size, so we don't need
-to recalculate the size at every iteration.
-
-```javascript
-for (i = 0, len = arr.length; i < len; i++) {
-  // array length is calculated only 1 time and then stored
-}
+```python
+d = {key: value for (key, value) in iterable}
 ```
 
+## Open File
+
+An easy and security way to open a file.
+**trigger**: readfile⇥
+
+```python
+with open('file.txt',"r") as f:
+    for line in f:
+        ...
+```
+
+
+## Email Verification Pattern
+
+**trigger**: emailverify⇥
+
+```python
+import re
+
+addressToVerify ='info@emailhippo.com' # change it
+match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', addressToVerify)
+
+if match == None:
+	print('Bad Syntax')
+```
+
+## Download Stock From Yahoo
+
+Iteratively create a pandas dataframe by column and download stock data from Yahoo.com
+
+**trigger**: downloadstock⇥
+
+```python
+import pandas.io.data as web
+import pandas as p
+from datetime import datetime as dt
+
+start = dt(2011,1,3)
+# end = dt.today()
+end = dt(2011,6,5)
+
+stocks = [        'XLY',  # XLY Consumer Discrectionary SPDR Fund   
+                       'XLF',  # XLF Financial SPDR Fund  
+                       'XLK',  # XLK Technology SPDR Fund  
+                       'XLE',  # XLE Energy SPDR Fund  
+                       'XLV',  # XLV Health Care SPRD Fund  
+                       'XLI',  # XLI Industrial SPDR Fund  
+                       'XLP',  # XLP Consumer Staples SPDR Fund   
+                       'XLB',  # XLB Materials SPDR Fund  
+                       'XLU' ]
+
+prices = p.DataFrame()
+
+for stock in stocks:
+    prices[stock] = web.DataReader(stock, 'yahoo', start, end)['Adj Close']
+```
 Reference:
-- [Browser Diet](http://browserdiet.com/#cache-array-lengths)
+- [What are some nifty python snippets that you have found very useful and would like to share?](https://www.reddit.com/r/Python/comments/2ysd91/what_are_some_nifty_python_snippets_that_you_have/)
+
+## Get Links
+
+**trigger**: getlinks⇥
+
+Get all links from given website and print them.
+
+```python
+import urllib
+import BeautifulSoup
+
+htmlSource = urllib.urlopen("${1:http://sebsauvage.net/index.html}").read(200000)
+soup = BeautifulSoup.BeautifulSoup(htmlSource)
+for item in soup.fetch('a'):
+    print item['href'] 
+```
+
+## Graph Search
+
+**trigger**: graphsearch⇥
+
+Implementation of Graph search with Python.
+
+```python
+class ${1:GraphSearch}:
+
+    """${2:comments}"""
+
+    def __init__(self, ${3:graph}):
+        self.${3:graph} = ${3:graph}
+
+    def find_path(self, start, end, path=None):
+        self.start = start
+        self.end = end
+        self.path = path if path else []
+
+        self.path += [self.start]
+        if self.start == self.end:
+            return self.path
+        if self.start not in self.graph:
+            return None
+        for node in self.graph[self.start]:
+            if node not in self.path:
+                newpath = self.find_path(node, self.end, self.path)
+                if newpath:
+                    return newpath
+        return None
+
+    def find_all_path(self, start, end, path=None):
+        self.start = start
+        self.end = end
+        _path = path if path else []
+        _path += [self.start]
+        if self.start == self.end:
+            return [_path]
+        if self.start not in self.graph:
+            return []
+        paths = []
+        for node in self.graph[self.start]:
+            if node not in _path:
+                newpaths = self.find_all_path(node, self.end, _path[:])
+                for newpath in newpaths:
+                    paths.append(newpath)
+        return paths
+
+    def find_shortest_path(self, start, end, path=None):
+        self.start = start
+        self.end = end
+        _path = path if path else []
+
+        _path += [self.start]
+        if self.start == self.end:
+            return _path
+        if self.start not in self.graph:
+            return None
+        shortest = None
+        for node in self.graph[self.start]:
+            if node not in _path:
+                newpath = self.find_shortest_path(node, self.end, _path[:])
+                if newpath:
+                    if not shortest or len(newpath) < len(shortest):
+                        shortest = newpath
+        return shortest
+
+"""
+
+# example of graph usage
+graph = {'A': ['B', 'C'],
+         'B': ['C', 'D'],
+         'C': ['D'],
+         'D': ['C'],
+         'E': ['F'],
+         'F': ['C']
+         }
+
+# initialization of new graph search object
+graph1 = GraphSearch(graph)
 
 
-## Constructor pattern
+print(graph1.find_path('A', 'D'))
+print(graph1.find_all_path('A', 'D'))
+print(graph1.find_shortest_path('A', 'D'))
 
-**trigger**: constructor⇥
+### OUTPUT ###
+# ['A', 'B', 'C', 'D']
+# [['A', 'B', 'C', 'D'], ['A', 'B', 'D'], ['A', 'C', 'D']]
+# ['A', 'B', 'D'] 
 
-That constructor pattern enforces the use of `new`, even if you call the
-constructor like a function. In JavaScript, if the `new` keyword is forgotten,
-`this` will reference the global object inside the constructor, and that's never
-a desirable situation.
+"""
 
-That approach is like `$()` and `$.Deferred()` in jQuery, where you can call
-it in the same way with `new $()` and `new $.Deferred`.
+```
 
-```javascript
-var ConstructorName = (function() {
-  'use strict';
 
-  function ConstructorName(arg1, arg2) {
-    // enforces new
-    if (!(this instanceof ConstructorName)) {
-        return new ConstructorName();
-    }
+## FTP Send File
 
-    // constructor body
-  }
+**trigger**: ftpsendfile⇥
 
-  ConstructorName.prototype.someMethod = function(arg) {
-    // method body
-  }
+Send a file by using the FTP.
 
-  return ConstructorName;
+```python
+import ftplib                                          # We import the FTP module
+
+session = ftplib.FTP('adress like blabla.com','login','passord') # Connect to the FTP server
+myfile = open('toto.txt','rb')                    # Open the file to send
+session.storbinary('STOR toto.txt', myfile)       # Send the file
+
+myfile.close()                                         # Close the file
+session.quit()                                         # Close FTP session
+```
+
+## Timestamped Filename
+
+**trigger**: timestampedfilename⇥
+
+```python
+import datetime, os
+
+def timestamped_filename(file_name, date_time=None):
+    date_time = date_time or datetime.datetime.now()
+    root, ext = os.path.splitext(file_name)
+    return '{}{:_%Y_%m_%d_%H_%M_%S}{}'.format(root, date_time, ext)
+```
+
+
+## Merge Sort
+
+**trigger**: mergesort⇥
+
+```python
+def merge(left, right, lt):
+    """Assumes left and right are sorted lists.
+     lt defines an ordering on the elements of the lists.
+     Returns a new sorted(by lt) list containing the same elements
+     as (left + right) would contain."""
+    result = []
+    i,j = 0, 0
+    while i < len(left) and j < len(right):
+        if lt(left[i], right[j]):
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    while (i < len(left)):
+        result.append(left[i])
+        i += 1
+    while (j < len(right)):
+        result.append(right[j])
+        j += 1
+    return result
+            
+def sort(L, lt = lambda x,y: x < y):
+    """Returns a new sorted list containing the same elements as L"""
+    if len(L) < 2:
+        return L[:]
+    else:
+        middle = int(len(L)/2)
+        left = sort(L[:middle], lt)
+        right = sort(L[middle:], lt)
+        #print 'About to merge', left, 'and', right
+        return merge(left, right, lt)
 }());
 ```
+## Tree Data Structure
 
-Reference:
-- [Object Creation patterns](http://www.jspatterns.com/category/patterns/object-creation/)
+**trigger**: tree⇥
+
+```python
+class Node:
+    """
+    Class Node
+    """
+    def __init__(self, value):
+        self.left = None
+        self.data = value
+        self.right = None
+
+class Tree:
+    """
+    Class tree will provide a tree as well as utility functions.
+    """
+
+    def createNode(self, data):
+        """
+        Utility function to create a node.
+        """
+        return Node(data)
+
+    def insert(self, node , data):
+        """
+        Insert function will insert a node into tree.
+        Duplicate keys are not allowed.
+        """
+        #if tree is empty , return a root node
+        if node is None:
+            return self.createNode(data)
+        # if data is smaller than parent , insert it into left side
+        if data < node.data:
+            node.left = self.insert(node.left, data)
+        elif data > node.data:
+            node.right = self.insert(node.right, data)
+
+        return node
 
 
-## Singleton pattern
+    def search(self, node, data):
+        """
+        Search function will search a node into tree.
+        """
+        # if root is None or root is the search data.
+        if node is None or node.data == data:
+            return node
 
-**trigger**: singleton⇥
+        if node.data < data:
+            return self.search(node.right, data)
+        else:
+            return self.search(node.left, data)
 
-With the Singleton pattern there will be only one instance of a constructor
-function. If you try to instantiate another one, the first instance that was
-created at first will be returned.
 
-```javascript
-var singletonName = (function() {
-  'use strict';
 
-  var instance;
+    def deleteNode(self,node,data):
+        """
+        Delete function will delete a node into tree.
+        Not complete , may need some more scenarion that we can handle
+        Now it is handling only leaf.
+        """
 
-  singletonName = function() {
-    if (instance) {
-      return instance;
-    }
+        # Check if tree is empty.
+        if node is None:
+            return None
 
-    instance = this;
+        # searching key into BST.
+        if data < node.data:
+            node.left = self.deleteNode(node.left, data)
+        elif data > node.data:
+            node.right = self.deleteNode(node.right, data)
+        else: # reach to the node that need to delete from BST.
+            if node.left is None and node.right is None:
+                del node
+            if node.left == None:
+                temp = node.right
+                del node
+                return  temp
+            elif node.right == None:
+                temp = node.left
+                del node
+                return temp
 
-    // your code goes here
-  };
+        return node
 
-  return singletonName;
-}());
+    def traverseInorder(self, root):
+        """
+        traverse function will print all the node in the tree.
+        """
+        if root is not None:
+            self.traverseInorder(root.left)
+            print root.data
+            self.traverseInorder(root.right)
 
+    def traversePreorder(self, root):
+        """
+        traverse function will print all the node in the tree.
+        """
+        if root is not None:
+            print root.data
+            self.traversePreorder(root.left)
+            self.traversePreorder(root.right)
+
+    def traversePostorder(self, root):
+        """
+        traverse function will print all the node in the tree.
+        """
+        if root is not None:
+            self.traversePreorder(root.left)
+            self.traversePreorder(root.right)
+            print root.data
 ```
 
-Reference:
-- [Singleton Pattern - Simples Ideias](http://simplesideias.com.br/design-patterns-no-javascript-singleton)
+## Timestamped Filename
 
+**trigger**: timestampedfilename⇥
 
-## Module
+```python
+import datetime, os
 
-**trigger**: module⇥
-
-A simple module pattern. Uses strict mode and suggest the use of a `init`
-function for kickoff. Also possible to define some "private" methods and
-variables. Only the variable with the module's name is returned and therefore
-made public outside the closure.
-
-```javascript
-var moduleName = (function() {
-  'use strict';
-
-  var privateVar = '';
-
-  var moduleName = {
-    init: {
-      // kickoff
-    }
-  }
-
-  return moduleName;
-}());
+def timestamped_filename(file_name, date_time=None):
+    date_time = date_time or datetime.datetime.now()
+    root, ext = os.path.splitext(file_name)
+    return '{}{:_%Y_%m_%d_%H_%M_%S}{}'.format(root, date_time, ext)
 ```
 
-Reference:
-- [JavaScript Module Pattern: In-Depth](http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html)
-
-
-## Revealing module
-
-**trigger**: rmodule⇥
-
-Some might say it's a less verbose and more organized way to define a module.
-It declares all the variables and functions in the private scope and returns
-an object with references to what is going to be public.
-
-```javascript
-var revealingModule = (function() {
-  'use strict';
-
-  var privateVar = 'foo';
-  var publicVar = 'bar';
-
-  function privateFunction() {
-
-  }
-
-  function publicFunction() {
-
-  }
-
-  return {
-    publicVar: publicVar,
-    publicFunction: publicFunction
-  };
-}());
-```
-
-## AMD
-
-**trigger**: amdmod⇥
-
-> The Asynchronous Module Definition (AMD) API specifies a mechanism for defining
-> modules such that the module and its dependencies can be asynchronously loaded.
-> This is particularly well suited for the browser environment where synchronous
-> loading of modules incurs performance, usability, debugging, and cross-domain
-> access problems.
-
-```js
-define([
-    "module1"
-], function(module1) {
-    "use strict";
-
-    // static public property
-    myModule.prop;
-
-    var myModule = function() {
-
-        // public var
-        this.b = null;
-
-        // pseudo-protected var
-        this._c = null;
-
-    };
-
-    function privateMethod(args) {
-    };
-
-    myModule.staticMethod = function(args) {
-    };
-
-    myModule.prototype.publicMethod = function(args) {
-    };
-
-    return myModule;
-});
-```
-
-Reference:
-- [AMD API](https://github.com/amdjs/amdjs-api/wiki/AMD)
-
-## Memoization
-
-Caches the return value of function. Useful for repetitive calls for a
-computationally expensive function.
-
-```javascript
-var expensiveFunction = (function() {
-  'use strict';
-
-  var funcMemoized = function() {
-    var cacheKey = JSON.stringify(Array.prototype.slice.call(arguments));
-    var result;
-
-    if (!funcMemoized.cache[cacheKey]) {
-        // your expensive computation goes here
-
-        funcMemoized.cache[cacheKey] = result;
-    }
-
-    return funcMemoized.cache[cacheKey];
-  }
-
-  funcMemoized.cache = {};
-
-  return funcMemoized;
-}());
-```
-
-## Throttle
-
-The function will be called no more than one time every X seconds, even if you
-call it repeatedly. Useful for some DOM events like the resize event on the
-window.
-
-```javascript
-var onResize = (function() {
-  'use strict';
-
-  var timeWindow = 200; // time in ms
-  var lastExecution = new Date((new Date()).getTime() - timeWindow);
-
-  var onResize = function(args) {
-    // your code goes here
-  };
-
-  return function() {
-    if ((lastExecution.getTime() + timeWindow) <= (new Date()).getTime()) {
-      lastExecution = new Date();
-      return onResize.apply(this, arguments);
-    }
-  };
-}());
-```
-
-Reference:
-- [Underscore.js](http://underscorejs.org/docs/underscore.html#section-64)
-
-
-## Debounce
-
-The function will postpone its execution until X miliseconds have elapsed since
-the last call. Useful for some events that you want to happen after some time
-after the last interaction, like an autocomplete or a double-click in a submit
-button.
-
-```javascript
-var autocomplete = (function() {
-  'use strict';
-
-  var timeWindow = 500; // time in ms
-  var timeout;
-
-  var autocomplete = function(arg1, arg2) {
-    // your code goes here
-  };
-
-  return function() {
-    var context = this;
-    var args = arguments;
-    clearTimeout(timeout);
-    timeout = setTimeout(function() {
-      autocomplete.apply(context, args);
-    }, timeWindow);
-  };
-}());
-```
-
-Reference:
-- [Underscore.js](http://davidwalsh.name/function-debounce)
-- [David Walsh](http://davidwalsh.name/function-debounce)
-
-## Namespace
-**trigger**: namespace⇥
-
-Namespacing is a technique employed to avoid collisions with other objects or
-variables in the global namespace. They're also extremely useful for helping
-organize blocks of functionality in your application into easily manageable
-groups that can be uniquely identified. Extensibility is of course key to any
-scalable namespacing pattern and IIFEs can be used to achieve this quite easily.
-
-
-```javascript
-;(function(namespace) {
-  'use strict';
-
-  // your code goes here
-  // namespace.method = function(){};
-})(window.namespace = window.namespace || {});
-```
-
-Reference:
-- [Addy Osmani - Essential JS Namespacing](http://addyosmani.com/blog/essential-js-namespacing/)
-
-## Once
-**trigger**: once⇥
-
-Creates a function that can only be executed one time.
-
-```javascript
-var once = (function() {
-  var didRun = false;
-
-  // This function will be executed only once, no matter how many times
-  // it is called.
-  function once() {
-    // ...
-  }
-
-  return function() {
-    if (didRun) {
-      return;
-    }
-
-    didRun = true;
-
-    return foo.apply(this, arguments);
-  }
-})();
-```
+## And we've much more samples but I think that's enough for now.
 
 The MIT License (MIT)
 
