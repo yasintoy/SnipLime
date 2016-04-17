@@ -1,7 +1,7 @@
 # SnipLime
 A collection of design patterns/idioms/snippets for Sublime Text.
 
-# JavaScript Patterns snippets 
+# Python Patterns snippets 
 
 <img src="https://raw.github.com/caiogondim/js-patterns-sublime-snippets/assets/js-patterns-logo.png" alt="Python Patterns logo" align="right" />
 
@@ -18,77 +18,86 @@ for regular problems.
 
 **Using Package Control**:
 
-Bring up the Command Palette (Command+Shift+P on OS X, Control+Shift+P on Linux/Windows).
-Select Package Control: Install Package.
-Select Sublime Text 3 Snippets to install.
+> Bring up the Command Palette (Command+Shift+P on OS X, Control+Shift+P on Linux/Windows).
+> Select Package Control: Install Package.
+> Select Sublime Text 3 Snippets to install.
 
 **Not Using Package Control**:
 Save files to the Packages/Sublime Text 3 Snippets directory, then relaunch Sublime:
 
-git clone https://github.com/yasintoy/SnipLime.git
-cd SnipLime
-Linux: sudo cp Python/ ~/.config/sublime-text-2/Packages/
-Mac: sudo cp Python/ ~/Library/Application Support/Sublime-Text-3/Packages/
-Windows: sudo cp %APPDATA%/Sublime Text 3/Packages/
-(if you want install it for sublime-text-3, change it with sublime-text-2 )
+> git clone https://github.com/yasintoy/SnipLime.git
+> cd SnipLime
+> Linux: sudo cp Python/ ~/.config/sublime-text-2/Packages/
+> Mac: sudo cp Python/ ~/Library/Application Support/Sublime-Text-3/Packages/
+> Windows: cp %APPDATA%/Sublime-Text-2/Packages/
+(if you want to install it for sublime-text-3, change sublime-text-2 with sublime-text-3 )
 
-## Snippets
+## Snippets (You don't have to memorise triggers because it's really close to english sentences.)
 
 Some Python Patterns snippets in the wild.
 
 <img src="http://cdn1.caiogondim.com/js-patterns-sublime-snippets-preview.gif" alt="Preview" />
 
 
-## Immediate function
+## Factorial function
 
-**trigger**: ifun⇥
+**trigger**: factorial⇥
 
-To keep the global scope clean and to use strict mode in a controlled
-enviroment, without triggering it in the global scope.
+It works also for bigger numbers, when the result becomes **long**
+Reference:
+- [StackOverflow: Function for Factorial in Python](http://stackoverflow.com/questions/5136447/function-for-factorial-in-python)
 
-```javascript
-;(function() {
-    'use strict';
-    // closure scope
-}());
+```python
+from itertools import imap
+def factorial(x):
+    return reduce(long.__mul__, imap(long, xrange(1, x + 1))
+    
+print factorial(1000)
 ```
 
-Reference:
-- [StackOverflow: Immediate functions JavaScript](http://stackoverflow.com/questions/13364312/immediate-functions-javascript)
 
+## Get Twitter User Timeline
 
-## For in
+**trigger**: twittergetusertimeline⇥
 
-**trigger**: forin⇥
+Just change the api parameters and username that whatever you want!
 
-For-in loops in JavaScript will iterate over new properties added to the
-prototype chain of the object we are iterating.
-To loop through only in the object's properties, we have to use
-`.hasOwnProperty('propertyName')`. Like below.
+```python
+import twitter
 
-```javascript
-for (var prop in obj) {
-  if (obj.hasOwnProperty(prop)) {
-    obj[prop];
-  }
-}
+api = twitter.Api(consumer_key='your-consumer-key',
+                  consumer_secret='your-consumer-secret',
+                  access_token_key='your-access-token-key',
+                  access_token_secret='your-access-token-secret')
+
+# set a handle
+username = 'anthonydb'
+
+# get a user timeline
+statuses = api.GetUserTimeline(screen_name=username, count=1)
+print [s.text for s in statuses]
 ```
 
-Reference:
-- [JavaScript Patterns, by Stoyan Stefanov](http://shop.oreilly.com/product/9780596806767.do)
-- [The Essentials of Writing High Quality JavaScript](http://net.tutsplus.com/tutorials/javascript-ajax/the-essentials-of-writing-high-quality-javascript/)
+## Any Generate
 
+**trigger**: anygenerate⇥
 
-## Object.keys loop
+I like using **any** and a generator:
 
-**trigger**: okl⇥
-
-If your enviroment supports that method, prefer this over `for in`.
-
-```javascript
-Objects.keys(obj).forEach(function(key) {
-  // inside loop
+```python
+if any(pred(x.item) for x in sequence):
+    ...
 });
+```
+instead of code written like this:
+
+```python 
+found = False
+for x in sequence:
+    if pred(x.n):
+        found = True
+if found:
+    ...
 ```
 
 

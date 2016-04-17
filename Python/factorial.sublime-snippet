@@ -1,6 +1,10 @@
 <snippet>
     <content><![CDATA[
-factorial = lambda(n):reduce(int.__mul__, range(1, n+1), 1)
+from itertools import imap
+def factorial(x):
+    return reduce(long.__mul__, imap(long, xrange(1, x + 1))
+    
+print factorial(${1:1000})
 ]]></content>
     <tabTrigger>factorial</tabTrigger>
     <scope>source.python</scope>
