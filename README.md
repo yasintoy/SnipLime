@@ -3,7 +3,7 @@ A collection of design patterns/idioms/snippets for Sublime Text.
 
 # Python Patterns snippets 
 
-<img src="https://raw.github.com/caiogondim/js-patterns-sublime-snippets/assets/js-patterns-logo.png" alt="Python Patterns logo" align="right" />
+<img src="http://blogs.theage.com.au/schembri/rat1.jpg" alt="Python Patterns logo" align="right" />
 
 Design patterns/idioms/snippets for [Sublime Text](http://www.sublimetext.com/) with **good solutions
 for regular problems.
