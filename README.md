@@ -1,9 +1,7 @@
 # SnipLime
 A collection of design patterns/idioms/snippets for Sublime Text.
-
-# Python Patterns snippets 
-
 <img src="http://blogs.theage.com.au/schembri/rat1.jpg" alt="Python Patterns logo" align="right" />
+# Python Patterns snippets 
 
 Design patterns/idioms/snippets for [Sublime Text](http://www.sublimetext.com/) with **good solutions
 for regular problems.
