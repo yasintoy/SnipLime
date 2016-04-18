@@ -12,6 +12,10 @@ for regular problems.
 >
 > – Brian W. Kernighan, co-author of The C Programming Language and the "K" in "AWK"
 
+## Preview
+<img src="http://i.imgur.com/7Ve2yn7.gif" alt="Preview" />
+
+
 ## Installation
 
 **Using Package Control**:
@@ -40,8 +44,6 @@ Save files to the Packages/Sublime Text 3 Snippets directory, then relaunch Subl
 ## Snippets 
 > (You don't have to memorise triggers because it's really close to english sentences.)
 Some Python Patterns snippets in the wild.
-
-<img src="http://i.imgur.com/7Ve2yn7.gif" alt="Preview" />
 
 
 ## Factorial function
