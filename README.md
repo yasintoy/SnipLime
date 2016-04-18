@@ -41,7 +41,7 @@ Save files to the Packages/Sublime Text 3 Snippets directory, then relaunch Subl
 > (You don't have to memorise triggers because it's really close to english sentences.)
 Some Python Patterns snippets in the wild.
 
-<img src="http://cdn1.caiogondim.com/js-patterns-sublime-snippets-preview.gif" alt="Preview" />
+<img src="http://i.imgur.com/7Ve2yn7.gif" alt="Preview" />
 
 
 ## Factorial function
