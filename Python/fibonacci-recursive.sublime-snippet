@@ -1,9 +1,10 @@
 <snippet>
     <content><![CDATA[
 def ${1:F}(n):
-    if n == 0: return 0
-    elif n == 1: return 1
-    else: return ${1:F}(n-1)+${1:F}(n-2)
+    if n < 2: 
+        return n
+    else: 
+        return ${1:F}(n-1)+${1:F}(n-2)
 ]]></content>
     <tabTrigger>fibonaccirecursive</tabTrigger>
     <scope>source.python</scope>
