@@ -1,0 +1,11 @@
+<snippet>
+    <content><![CDATA[
+def fibonacci_generator(a=0, b=1):
+    while True:
+        yield a
+        a, b = b, a + b
+]]></content>
+    <tabTrigger>fibonaccigenerator</tabTrigger>
+    <scope>source.python</scope>
+    <description>get fibonacci_numbers pattern</description>
+</snippet>
