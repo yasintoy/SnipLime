@@ -5,7 +5,7 @@ def fibonacci_generator(a=0, b=1):
         yield a
         a, b = b, a + b
 ]]></content>
-    <tabTrigger>fibonaccinumbers</tabTrigger>
+    <tabTrigger>fibonaccigenerator</tabTrigger>
     <scope>source.python</scope>
     <description>get fibonacci_numbers pattern</description>
 </snippet>
