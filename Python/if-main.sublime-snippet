@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[
+def main():
+    ${1:pass}
+
+if __name__ == '__main__':
+    main()
+
+]]></content>
+	<tabTrigger>main</tabTrigger> 
+	 <scope>source.python</scope> 
+	 <description>if main starter</description>
+</snippet>
