@@ -45,10 +45,24 @@ Save files to the Packages/Sublime Text 3 Snippets directory, then relaunch Subl
 > (You don't have to memorise triggers because it's really close to english sentences.)
 Some Python Patterns snippets in the wild.
 
+# Main Function
+
+Here are two that I use frequently.
+
+**trigger**: main⇥
+
+``` 
+def main():
+    pass
+
+if __name__ == '__main__':
+    main()
+
+```
 
 ## Factorial function
 
-**trigger**: factorial⇥
+**trigger**: factorial
 
 It works also for bigger numbers, when the result becomes **long**
 Reference:
