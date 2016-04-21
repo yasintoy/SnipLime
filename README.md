@@ -51,7 +51,7 @@ Here are two that I use frequently.
 
 **trigger**: main⇥
 
-``` 
+``` python
 def main():
     pass
 
