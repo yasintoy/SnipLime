@@ -10,8 +10,3 @@ def ${1:F}(n):
     <scope>source.python</scope>
     <description>fibonacci_recursive pattern</description>
 </snippet>
-]]></content>
-    <tabTrigger>fibonaccinumbers</tabTrigger>
-    <scope>source.python</scope>
-    <description>get fibonacci_numbers pattern</description>
-</snippet>
