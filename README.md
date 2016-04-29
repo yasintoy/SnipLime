@@ -33,7 +33,7 @@ Save files to the Packages/Sublime Text 3 Snippets directory, then relaunch Subl
 
 > cd SnipLime
 
-> Linux: sudo cp Python/ ~/.config/sublime-text-2/Packages/
+> Linux: sudo cp -r Python/ ~/.config/sublime-text-2/Packages/
 
 > Mac: sudo cp Python/ ~/Library/Application Support/Sublime-Text-3/Packages/
 
